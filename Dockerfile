@@ -3,7 +3,7 @@ MAINTAINER Ben Firshman "ben@orchardup.com"
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get -qq update
-RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y -q postgresql-9.1 postgresql-contrib-9.1 postgresql-9.1-postgis libpq-dev
+RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y -q postgresql-9.1 postgresql-contrib-9.1 postgresql-9.1-postgis libpq-dev sudo
 
 # /etc/ssl/private can't be accessed from within container for some reason
 # (@andrewgodwin says it's something AUFS related)
@@ -14,7 +14,6 @@ ADD pg_hba.conf /etc/postgresql/9.1/main/pg_hba.conf
 ADD run /usr/local/bin/run
 
 VOLUME ["/var/lib/postgresql"]
-USER postgres
 EXPOSE 5432
 CMD ["/usr/local/bin/run"]
 
