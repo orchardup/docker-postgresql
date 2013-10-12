@@ -14,5 +14,5 @@ PostgreSQL for Docker.
 
     test=#
 
-
+(Example assumes PostgreSQL client is installed on Docker host.)
 
