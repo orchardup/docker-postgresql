@@ -3,6 +3,7 @@ set -e
 
 POSTGRESQL_USER=${POSTGRESQL_USER:-"docker"}
 POSTGRESQL_PASS=${POSTGRESQL_PASS:-"docker"}
+POSTGRESQL_DB=${POSTGRESQL_DB:-"docker"}
 
 POSTGRESQL_BIN=/usr/lib/postgresql/9.1/bin/postgres
 POSTGRESQL_CONFIG_FILE=/etc/postgresql/9.1/main/postgresql.conf
@@ -18,6 +19,7 @@ fi
 
 sudo -u postgres $POSTGRESQL_BIN --single --config-file=$POSTGRESQL_CONFIG_FILE <<< "CREATE USER $POSTGRESQL_USER WITH SUPERUSER;"
 sudo -u postgres $POSTGRESQL_BIN --single --config-file=$POSTGRESQL_CONFIG_FILE <<< "ALTER USER $POSTGRESQL_USER WITH PASSWORD '$POSTGRESQL_PASS';"
+sudo -u postgres $POSTGRESQL_BIN --single --config-file=$POSTGRESQL_CONFIG_FILE <<< "CREATE DATABASE $POSTGRESQL_DB OWNER $POSTGRESQL_USER;"
 
 exec sudo -u postgres $POSTGRESQL_BIN --config-file=$POSTGRESQL_CONFIG_FILE
 
