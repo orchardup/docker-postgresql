@@ -1,7 +1,6 @@
-FROM ubuntu:12.04
+FROM stackbrew/ubuntu:12.04
 MAINTAINER Ben Firshman "ben@orchardup.com"
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get -qq update
 RUN locale-gen en_US.UTF-8
 RUN LC_ALL=en_US.UTF-8 DEBIAN_FRONTEND=noninteractive apt-get install -y -q postgresql-9.1 postgresql-contrib-9.1 postgresql-9.1-postgis libpq-dev sudo
