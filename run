@@ -23,14 +23,14 @@ fi
 TEMPLATE_POSTGIS_EXISTS=`$POSTGRESQL_SINGLE <<< "SELECT datname FROM pg_database;" | grep template_postgis | wc -l`
 if [[ $TEMPLATE_POSTGIS_EXISTS == "0" ]]; then
     echo "Installing template_postgis"
-    $POSTGRESQL_SINGLE <<< "CREATE DATABASE template_postgis;"
+    $POSTGRESQL_SINGLE <<< "CREATE DATABASE template_postgis;" > /dev/null
     $POSTGRESQL_SINGLE < /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql 2>/dev/null 1>/dev/null
     $POSTGRESQL_SINGLE < /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql 2>/dev/null 1>/dev/null
 fi
 
-$POSTGRESQL_SINGLE <<< "CREATE USER $POSTGRESQL_USER WITH SUPERUSER;"
-$POSTGRESQL_SINGLE <<< "ALTER USER $POSTGRESQL_USER WITH PASSWORD '$POSTGRESQL_PASS';"
-$POSTGRESQL_SINGLE <<< "CREATE DATABASE $POSTGRESQL_DB OWNER $POSTGRESQL_USER TEMPLATE $POSTGRESQL_TEMPLATE;"
+$POSTGRESQL_SINGLE <<< "CREATE USER $POSTGRESQL_USER WITH SUPERUSER;" > /dev/null
+$POSTGRESQL_SINGLE <<< "ALTER USER $POSTGRESQL_USER WITH PASSWORD '$POSTGRESQL_PASS';" > /dev/null
+$POSTGRESQL_SINGLE <<< "CREATE DATABASE $POSTGRESQL_DB OWNER $POSTGRESQL_USER TEMPLATE $POSTGRESQL_TEMPLATE;" > /dev/null
 
 exec sudo -u postgres $POSTGRESQL_BIN --config-file=$POSTGRESQL_CONFIG_FILE
 
