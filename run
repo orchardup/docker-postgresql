@@ -20,6 +20,14 @@ if [ ! -d $POSTGRESQL_DATA ]; then
     ln -s /etc/ssl/private/ssl-cert-snakeoil.key $POSTGRESQL_DATA/server.key
 fi
 
+TEMPLATE_POSTGIS_EXISTS=`$POSTGRESQL_SINGLE <<< "SELECT datname FROM pg_database;" | grep template_postgis | wc -l`
+if [[ $TEMPLATE_POSTGIS_EXISTS == "0" ]]; then
+    echo "Installing template_postgis"
+    $POSTGRESQL_SINGLE <<< "CREATE DATABASE template_postgis;"
+    $POSTGRESQL_SINGLE < /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql 2>/dev/null 1>/dev/null
+    $POSTGRESQL_SINGLE < /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql 2>/dev/null 1>/dev/null
+fi
+
 $POSTGRESQL_SINGLE <<< "CREATE USER $POSTGRESQL_USER WITH SUPERUSER;"
 $POSTGRESQL_SINGLE <<< "ALTER USER $POSTGRESQL_USER WITH PASSWORD '$POSTGRESQL_PASS';"
 $POSTGRESQL_SINGLE <<< "CREATE DATABASE $POSTGRESQL_DB OWNER $POSTGRESQL_USER TEMPLATE $POSTGRESQL_TEMPLATE;"
