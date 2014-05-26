@@ -14,3 +14,12 @@ PostgreSQL for Docker.
 
 (Example assumes PostgreSQL client is installed on Docker host.)
 
+
+## Environment variables
+
+ - `POSTGRESQL_DB`: A database that is automatically created if it doesn't exist. Default: `docker`
+ - `POSTGRESQL_USER`: A user to create that has access to the database specified by `POSTGRESQL_DB`. Default: `docker`
+ - `POSTGRESQL_PASS`: The password for `POSTGRESQL_USER`. Default: `docker`
+
+
+
