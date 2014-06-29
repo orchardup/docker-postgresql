@@ -15,7 +15,7 @@ POSTGRESQL_SINGLE="sudo -u postgres $POSTGRESQL_BIN --single --config-file=$POST
 if [ ! -d $POSTGRESQL_DATA ]; then
     mkdir -p $POSTGRESQL_DATA
     chown -R postgres:postgres $POSTGRESQL_DATA
-    sudo -u postgres /usr/lib/postgresql/9.1/bin/initdb -D $POSTGRESQL_DATA
+    sudo -u postgres /usr/lib/postgresql/9.1/bin/initdb -D $POSTGRESQL_DATA -E 'UTF-8'
     ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem $POSTGRESQL_DATA/server.crt
     ln -s /etc/ssl/private/ssl-cert-snakeoil.key $POSTGRESQL_DATA/server.key
 fi
