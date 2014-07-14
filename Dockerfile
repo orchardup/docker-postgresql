@@ -1,4 +1,4 @@
-FROM stackbrew/ubuntu:12.04
+FROM ubuntu:12.04
 MAINTAINER Ben Firshman "ben@orchardup.com"
 
 RUN locale-gen en_US.UTF-8
