@@ -2,7 +2,9 @@ FROM ubuntu:14.04
 MAINTAINER Ben Firshman "ben@orchardup.com"
 
 RUN locale-gen en_US.UTF-8
-RUN apt-get -qq update && LC_ALL=en_US.UTF-8 DEBIAN_FRONTEND=noninteractive apt-get install -y -q postgresql-9.3 postgresql-contrib-9.3 postgresql-9.3-postgis-2.1 libpq-dev sudo
+RUN update-locale LANG=en_US.UTF-8
+
+RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q postgresql-9.3 postgresql-contrib-9.3 postgresql-9.3-postgis-2.1 libpq-dev sudo
 
 # /etc/ssl/private can't be accessed from within container for some reason
 # (@andrewgodwin says it's something AUFS related)
