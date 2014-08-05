@@ -1,7 +1,7 @@
 docker-postgresql
 =================
 
-**Note:** There is now an [official Postgres image](https://github.com/orchardup/docker-postgresql) available so this image is no longer maintained. We recommend you switch to using that image. You cannot configure its database name, username and password, but it does set up a user called `postgres` (no password) and a database called `postgres` which you can use instead.
+**Note:** There is now an [official Postgres image](https://registry.hub.docker.com/_/postgres/) available so this image is no longer maintained. We recommend you switch to using that image. You cannot configure its database name, username and password, but it does set up a user called `postgres` (no password) and a database called `postgres` which you can use instead.
 
 PostgreSQL 9.3 for Docker.
 
